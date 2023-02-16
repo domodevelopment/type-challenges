@@ -22,7 +22,9 @@
 
 /* _____________ Your Code Here _____________ */
 
-type MyAwaited<T> = any
+type MyAwaited<T> = T extends Partial<Promise<infer U>>
+  ? U extends Partial<Promise<any>> ? MyAwaited<U> : U
+  : error
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
